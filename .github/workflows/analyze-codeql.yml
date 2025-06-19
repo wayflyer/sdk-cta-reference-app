@@ -1,0 +1,16 @@
+name: CodeQL analysis
+'on':
+  schedule:
+  - cron: "0 2 * * *"
+  workflow_dispatch: {}
+jobs:
+  analyze-codeql:
+    uses: wayflyer/analyze-codeql/.github/workflows/analyze.yml@v1
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+      packages: read
+      security-events: write
+    secrets:
+      WAYFLYER_GITHUB_TOKEN: ${{ secrets.WAYFLYER_GITHUB_TOKEN }}
