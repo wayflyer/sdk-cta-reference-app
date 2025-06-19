@@ -15,7 +15,7 @@
     "@mantine/hooks": "^8.1.1",
     "@mantine/modals": "^8.1.1",
     "@tabler/icons-react": "^3.34.0",
-    "@wayflyer/embedded-finance-frontend": "github:wayflyer/embedded-finance-frontend#13cad1a065ffc4853938999c9003e8f4a4e4dc49",
+    "@wayflyer/embedded-finance-frontend": "github:wayflyer/embedded-finance-frontend#f083ee8c8ea79ca58ea06c89ff544fb663f73a62",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

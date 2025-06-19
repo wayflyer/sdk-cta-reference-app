@@ -1,4 +1,4 @@
-import { Center, Container, Loader } from "@mantine/core";
+import { Center, Container, Flex, Loader, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   CtaResponseTypes,
@@ -11,11 +11,15 @@ import {
 import { useEffect, useState } from "react";
 import ContinueApplicationBanner from "./components/continue-application-banner";
 import GetFinancingBanner from "./components/get-financing-banner";
+import SelectScenarioMenu, {
+  type Scenario,
+} from "./components/select-scenario-menu";
 import StartHostedApplicationModal from "./components/start-hosted-application-modal";
 
 export default function App() {
   const [ctaData, setCtaData] = useState<CtaResponseType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [scenario, setScenario] = useState<Scenario>("indicative_offer");
   const [sdk, setSdk] = useState<WayflyerCtaSdk | null>(null);
   const [
     startHostedApplicationModalOpened,
@@ -28,7 +32,22 @@ export default function App() {
   useEffect(() => {
     const initializeSdk = async () => {
       const sdkInstance = new WayflyerCtaSdk("your-company-token-here");
-      sdkInstance.setCtaResponse(CtaResponseTypes.INDICATIVE_OFFER);
+      switch (scenario) {
+        case "indicative_offer":
+          sdkInstance.setCtaResponse(CtaResponseTypes.INDICATIVE_OFFER);
+          break;
+        case "generic_offer":
+          sdkInstance.setCtaResponse(CtaResponseTypes.GENERIC_OFFER);
+          break;
+        case "continue_hosted_application":
+          sdkInstance.setCtaResponse(
+            CtaResponseTypes.CONTINUE_HOSTED_APPLICATION,
+          );
+          break;
+        default:
+          sdkInstance.setCtaResponse(CtaResponseTypes.NO_CTA);
+          break;
+      }
       sdkInstance.setStartHostedApplicationResponse(
         StartHostedApplicationResponseTypes.REDIRECT_URL,
       );
@@ -38,7 +57,7 @@ export default function App() {
     };
 
     initializeSdk();
-  }, []);
+  }, [scenario]);
 
   const handleStartHostedApplication = async (): Promise<
     StartHostedApplicationResponseType | undefined
@@ -49,36 +68,41 @@ export default function App() {
   };
 
   return (
-    <Container size="xl">
-      {loading && (
-        <Center style={{ minHeight: "200px" }}>
-          <Loader size="lg" />
-        </Center>
-      )}
-      {ctaData?.state &&
-        [CtaStateType.GENERIC_OFFER, CtaStateType.INDICATIVE_OFFER].includes(
-          ctaData.state,
-        ) && (
-          <GetFinancingBanner
+    <Container size="xl" mt="xl">
+      <Stack gap="xl">
+        <Flex justify="flex-start">
+          <SelectScenarioMenu onSelect={setScenario} />
+        </Flex>
+        {loading && (
+          <Center style={{ minHeight: "200px" }}>
+            <Loader size="lg" />
+          </Center>
+        )}
+        {ctaData?.state &&
+          [CtaStateType.GENERIC_OFFER, CtaStateType.INDICATIVE_OFFER].includes(
+            ctaData.state,
+          ) && (
+            <GetFinancingBanner
+              text={ctaData.data.config.text}
+              bulletPoints={ctaData.data.config.bullet_points}
+              buttonText={ctaData.data.config.button_label}
+              onClick={openStartHostedApplicationModal}
+            />
+          )}
+        {ctaData?.state === CtaStateType.CONTINUE_APPLICATION && (
+          <ContinueApplicationBanner
             text={ctaData.data.config.text}
             bulletPoints={ctaData.data.config.bullet_points}
             buttonText={ctaData.data.config.button_label}
-            onClick={openStartHostedApplicationModal}
+            redirectUrl={ctaData.data.config.redirect_url}
           />
         )}
-      {ctaData?.state === CtaStateType.CONTINUE_APPLICATION && (
-        <ContinueApplicationBanner
-          text={ctaData.data.config.text}
-          bulletPoints={ctaData.data.config.bullet_points}
-          buttonText={ctaData.data.config.button_label}
-          redirectUrl={ctaData.data.config.redirect_url}
+        <StartHostedApplicationModal
+          opened={startHostedApplicationModalOpened}
+          close={closeStartHostedApplicationModal}
+          startHostedApplication={handleStartHostedApplication}
         />
-      )}
-      <StartHostedApplicationModal
-        opened={startHostedApplicationModalOpened}
-        close={closeStartHostedApplicationModal}
-        startHostedApplication={handleStartHostedApplication}
-      />
+      </Stack>
     </Container>
   );
 }
