@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: <Insert a good name here!>
+  description: <Insert brief description here!>
+  annotations:
+    github.com/project-slug: wayflyer/sdk-cta-reference-app
+spec:
+  type: service|website|library - choose one!
+  lifecycle: experimental|production|deprecated - choose one!
+  owner: <Insert a [group](https://app.backstage.wayflyer.team/catalog?filters%5Bkind%5D=group&filters%5Buser%5D=all)
+    here, present in Backstage>
