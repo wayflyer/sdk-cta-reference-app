@@ -1,9 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { ModalsProvider } from "@mantine/modals";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <MantineProvider theme={{ defaultRadius: "md" }}>
+      <ModalsProvider>
+        <App />
+      </ModalsProvider>
+    </MantineProvider>
   </StrictMode>,
-)
+);
