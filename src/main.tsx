@@ -7,7 +7,12 @@ import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MantineProvider theme={{ defaultRadius: "md" }}>
+    <MantineProvider
+      theme={{
+        defaultRadius: "md",
+        primaryColor: "blue",
+      }}
+    >
       <ModalsProvider>
         <App />
       </ModalsProvider>

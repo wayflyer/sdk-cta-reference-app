@@ -1,17 +1,21 @@
-import { AppShell, Burger, Group, Image, NavLink } from "@mantine/core";
+import { AppShell, Burger, Button, Group, Image, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconApps,
   IconBuildingStore,
   IconChartBar,
   IconHome,
+  IconMovie,
   IconPackage,
   IconSettings,
   IconShoppingCart,
   IconTag,
   IconUsers,
 } from "@tabler/icons-react";
+import { useState } from "react";
 import logo from "./assets/logo.svg";
+import SelectScenarioDrawer from "./components/select-scenario-drawer";
+import { type Scenario } from "./components/select-scenario-menu";
 import Dashboard from "./pages/dashboard";
 
 const navigationItems = [
@@ -28,6 +32,9 @@ const navigationItems = [
 
 export default function App() {
   const [opened, { toggle }] = useDisclosure();
+  const [selectScenarioDrawerOpened, { toggle: toggleSelectScenarioDrawer }] =
+    useDisclosure();
+  const [scenario, setScenario] = useState<Scenario>("indicative_offer");
 
   return (
     <AppShell
@@ -36,11 +43,33 @@ export default function App() {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <div style={{ width: 150 }}>
-            <Image src={logo} alt="Wayflyer" fit="contain" />
-          </div>
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+            />
+            <div style={{ width: 150 }}>
+              <Image src={logo} alt="Wayflyer" fit="contain" />
+            </div>
+          </Group>
+          <Group>
+            <Button
+              onClick={toggleSelectScenarioDrawer}
+              variant="outline"
+              leftSection={<IconMovie />}
+            >
+              Select Scenario
+            </Button>
+            <SelectScenarioDrawer
+              scenario={scenario}
+              opened={selectScenarioDrawerOpened}
+              onClose={toggleSelectScenarioDrawer}
+              onSelect={setScenario}
+            />
+          </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
@@ -56,7 +85,7 @@ export default function App() {
         ))}
       </AppShell.Navbar>
       <AppShell.Main bg="gray.1">
-        <Dashboard />
+        <Dashboard scenario={scenario} />
       </AppShell.Main>
     </AppShell>
   );
