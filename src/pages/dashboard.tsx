@@ -1,11 +1,4 @@
-import {
-  Center,
-  Container,
-  Flex,
-  Loader,
-  Skeleton,
-  Stack,
-} from "@mantine/core";
+import { Center, Container, Loader, Skeleton, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   CtaResponseTypes,
@@ -18,15 +11,16 @@ import {
 import { useEffect, useState } from "react";
 import ContinueApplicationBanner from "../components/continue-application-banner";
 import GetFinancingBanner from "../components/get-financing-banner";
-import SelectScenarioMenu, {
-  type Scenario,
-} from "../components/select-scenario-menu";
+import type { Scenario } from "../components/select-scenario-menu";
 import StartHostedApplicationModal from "../components/start-hosted-application-modal";
 
-export default function Dashboard() {
+interface Props {
+  scenario: Scenario;
+}
+
+export default function Dashboard({ scenario }: Props) {
   const [ctaData, setCtaData] = useState<CtaResponseType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [scenario, setScenario] = useState<Scenario>("indicative_offer");
   const [sdk, setSdk] = useState<WayflyerCtaSdk | null>(null);
   const [
     startHostedApplicationModalOpened,
@@ -95,9 +89,6 @@ export default function Dashboard() {
   return (
     <Container size="xl" mt="xl">
       <Stack gap="xl">
-        <Flex justify="flex-start">
-          <SelectScenarioMenu onSelect={setScenario} />
-        </Flex>
         {loading && (
           <Center style={{ minHeight: "200px" }}>
             <Loader size="lg" />
