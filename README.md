@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# @wayflyer/sdk-cta reference appAdd commentMore actions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk-cta](https://www.npmjs.com/package/@wayflyer/sdk-cta)
 
-Currently, two official plugins are available:
+You can see a live example at [https://sdk-cta-reference-4zdkzonnw-wayflyer.vercel.app/](https://sdk-cta-reference-4zdkzonnw-wayflyer.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use the `Select Scenario` button to choose a scenario and see how the UI reacts.
 
-## Expanding the ESLint configuration
+## Quickstart
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Using devcontainers
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+We love [devcontainers](https://code.visualstudio.com/docs/devcontainers/containers) at Wayflyer. This project contains a `.devcontainer/devcontainer.json` file so you can quickly get started using VS Code or one of many editors that support devcontainers. Open the command palette and choose _Dev Containers: Clone Repository in Container Volume..._` and paste the URL of this repo.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Without devcontainers
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+If you don't want to use a devcontainer you can just clone the repo in the normal way.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+### Installing dependencies
+
+From your terminal:
+
+1. Install dependencies with `npm i`
+1. Run the app with `npm run dev`
+
+You should now be able to access the app at http://localhost:5173
+
+## SDK Usage Examples
+
+### SDK Initialization
+
+The Wayflyer CTA SDK is initialized in `src/pages/dashboard.tsx`. From there, you can see how to:
+
+- Create a new SDK instance with your company token
+  - In production this would be minted from the API by exchanging your partner token; consult the documentation provided by Wayflyer for more instructions.
+- Mock responses for `getCta()` and `startHostedApplication()`
+- Configure the start hosted application response type to return a redirect URL
+
+### Mocking API calls
+
+The SDK is currently still under active development and is configured to always intercept requests to the Wayflyer API and return mocked responses.
+
+#### Mocking getCta() calls
+
+Use the `setCtaResponse()` method to mock the `getCta()` method. The response from `getCta()` contains a payload that should be used to render different kinds of banner components. In the dashboard component, you can see examples of:
+
+- **Indicative Offer**: Shows a financing banner with specific offer details
+- **Generic Offer**: Displays a general financing banner without specific terms
+- **Continue Application**: Shows a banner to continue an existing application with a redirect URL
+- **No CTA**: Returns no call-to-action data
+- Simulate auth errors
+
+### Mocking startHostedApplication() calls
+
+Use the `startHostedApplication()` method to mock the `handleStartHostedApplication()` method. It can be configured to:
+
+- Return a valid response with a url to redirect the user to
+- Simulate auth errors
