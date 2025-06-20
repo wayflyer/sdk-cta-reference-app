@@ -1,5 +1,27 @@
-import { Center, Container, Flex, Loader, Stack } from "@mantine/core";
+import {
+  AppShell,
+  Burger,
+  Center,
+  Container,
+  Flex,
+  Group,
+  Loader,
+  NavLink,
+  Stack,
+  Text,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import {
+  IconApps,
+  IconBuildingStore,
+  IconChartBar,
+  IconHome,
+  IconPackage,
+  IconSettings,
+  IconShoppingCart,
+  IconTag,
+  IconUsers,
+} from "@tabler/icons-react";
 import {
   CtaResponseTypes,
   CtaStateType,
@@ -86,42 +108,108 @@ export default function App() {
     }
   };
 
+  const [opened, { toggle }] = useDisclosure();
+
   return (
-    <Container size="xl" mt="xl">
-      <Stack gap="xl">
-        <Flex justify="flex-start">
-          <SelectScenarioMenu onSelect={setScenario} />
-        </Flex>
-        {loading && (
-          <Center style={{ minHeight: "200px" }}>
-            <Loader size="lg" />
-          </Center>
-        )}
-        {ctaData?.state &&
-          [CtaStateType.GENERIC_OFFER, CtaStateType.INDICATIVE_OFFER].includes(
-            ctaData.state,
-          ) && (
-            <GetFinancingBanner
-              text={ctaData.data.config.text}
-              bulletPoints={ctaData.data.config.bullet_points}
-              buttonText={ctaData.data.config.button_label}
-              onClick={openStartHostedApplicationModal}
-            />
-          )}
-        {ctaData?.state === CtaStateType.CONTINUE_APPLICATION && (
-          <ContinueApplicationBanner
-            text={ctaData.data.config.text}
-            bulletPoints={ctaData.data.config.bullet_points}
-            buttonText={ctaData.data.config.button_label}
-            redirectUrl={ctaData.data.config.redirect_url}
-          />
-        )}
-        <StartHostedApplicationModal
-          opened={startHostedApplicationModalOpened}
-          close={closeStartHostedApplicationModal}
-          startHostedApplication={handleStartHostedApplication}
+    <AppShell
+      header={{ height: 60 }}
+      navbar={{ width: 200, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      padding="md"
+    >
+      <AppShell.Header>
+        <Group h="100%" px="md">
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Text>Wayflyer</Text>
+        </Group>
+      </AppShell.Header>
+      <AppShell.Navbar p="md">
+        <NavLink
+          label="Home"
+          active
+          leftSection={<IconHome size={20} />}
+          variant="filled"
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
         />
-      </Stack>
-    </Container>
+        <NavLink
+          label="Orders"
+          leftSection={<IconShoppingCart size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Products"
+          leftSection={<IconPackage size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Customers"
+          leftSection={<IconUsers size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Storefront"
+          leftSection={<IconBuildingStore size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Marketing"
+          leftSection={<IconTag size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Analytics"
+          leftSection={<IconChartBar size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Apps"
+          leftSection={<IconApps size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+        <NavLink
+          label="Settings"
+          leftSection={<IconSettings size={20} />}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
+      </AppShell.Navbar>
+      <AppShell.Main bg="gray.1">
+        <Container size="xl" mt="xl">
+          <Stack gap="xl">
+            <Flex justify="flex-start">
+              <SelectScenarioMenu onSelect={setScenario} />
+            </Flex>
+            {loading && (
+              <Center style={{ minHeight: "200px" }}>
+                <Loader size="lg" />
+              </Center>
+            )}
+            {ctaData?.state &&
+              [
+                CtaStateType.GENERIC_OFFER,
+                CtaStateType.INDICATIVE_OFFER,
+              ].includes(ctaData.state) && (
+                <GetFinancingBanner
+                  text={ctaData.data.config.text}
+                  bulletPoints={ctaData.data.config.bullet_points}
+                  buttonText={ctaData.data.config.button_label}
+                  onClick={openStartHostedApplicationModal}
+                />
+              )}
+            {ctaData?.state === CtaStateType.CONTINUE_APPLICATION && (
+              <ContinueApplicationBanner
+                text={ctaData.data.config.text}
+                bulletPoints={ctaData.data.config.bullet_points}
+                buttonText={ctaData.data.config.button_label}
+                redirectUrl={ctaData.data.config.redirect_url}
+              />
+            )}
+            <StartHostedApplicationModal
+              opened={startHostedApplicationModalOpened}
+              close={closeStartHostedApplicationModal}
+              startHostedApplication={handleStartHostedApplication}
+            />
+          </Stack>
+        </Container>
+      </AppShell.Main>
+    </AppShell>
   );
 }
