@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, NavLink, Text } from "@mantine/core";
+import { AppShell, Burger, Group, Image, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconApps,
@@ -11,6 +11,7 @@ import {
   IconTag,
   IconUsers,
 } from "@tabler/icons-react";
+import logo from "./assets/logo.svg";
 import Dashboard from "./pages/dashboard";
 
 const navigationItems = [
@@ -37,7 +38,9 @@ export default function App() {
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Text>Wayflyer</Text>
+          <div style={{ width: 150 }}>
+            <Image src={logo} alt="Wayflyer" fit="contain" />
+          </div>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">

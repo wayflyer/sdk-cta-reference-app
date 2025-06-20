@@ -2,7 +2,6 @@ import {
   Center,
   Container,
   Flex,
-  Group,
   Loader,
   Skeleton,
   Stack,
@@ -133,12 +132,7 @@ export default function Dashboard() {
         <Skeleton visible={true} animate={false} height={20} width="30%" />
         <Skeleton visible={true} animate={false} height={150} />
         <Skeleton visible={true} animate={false} height={20} width="40%" />
-        <Group gap="xs" justify="space-between">
-          <Skeleton visible={true} animate={false} height={200} width="20%" />
-          <Skeleton visible={true} animate={false} height={200} width="20%" />
-          <Skeleton visible={true} animate={false} height={200} width="20%" />
-          <Skeleton visible={true} animate={false} height={200} width="20%" />
-        </Group>
+        <Skeleton visible={true} animate={false} height={400} />
       </Stack>
     </Container>
   );
