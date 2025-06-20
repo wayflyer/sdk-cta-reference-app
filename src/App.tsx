@@ -7,7 +7,7 @@ import {
   WayflyerCtaSdk,
   type CtaResponseType,
   type StartHostedApplicationResponseType,
-} from "@wayflyer/embedded-finance-frontend/packages/sdk-cta";
+} from "@wayflyer/sdk-cta";
 import { useEffect, useState } from "react";
 import ContinueApplicationBanner from "./components/continue-application-banner";
 import GetFinancingBanner from "./components/get-financing-banner";
@@ -63,7 +63,26 @@ export default function App() {
     StartHostedApplicationResponseType | undefined
   > => {
     if (sdk) {
-      return await sdk.startHostedApplication({});
+      return await sdk.startHostedApplication({
+        company_data: {
+          company_name: "Wayflyer",
+          company_currency: "USD",
+          primary_store_url: "https://wayflyer.com",
+          company_annual_revenue: 1000000000,
+          company_onboarding_date: "2021-01-01",
+          company_incorporation_date: "2021-01-01",
+          country: "US",
+          state: "CA",
+          company_type: "LLC",
+        },
+        user_data: {
+          first_name: "John",
+          last_name: "Doe",
+          email_address: "john.doe@example.com",
+          phone_number: "+1234567890",
+        },
+        partner_data: {},
+      });
     }
   };
 

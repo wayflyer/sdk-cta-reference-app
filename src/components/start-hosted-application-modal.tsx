@@ -5,7 +5,7 @@ import {
   IconInfoCircle,
   IconRefresh,
 } from "@tabler/icons-react";
-import { type StartHostedApplicationResponseType } from "@wayflyer/embedded-finance-frontend/packages/sdk-cta";
+import { type StartHostedApplicationResponseType } from "@wayflyer/sdk-cta";
 
 interface Props {
   opened: boolean;
