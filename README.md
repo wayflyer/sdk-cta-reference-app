@@ -2,7 +2,7 @@
 
 This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk-cta](https://www.npmjs.com/package/@wayflyer/sdk-cta)
 
-You can see a live example at [https://sdk-cta-reference-4zdkzonnw-wayflyer.vercel.app/](https://sdk-cta-reference-4zdkzonnw-wayflyer.vercel.app/)
+You can see a live example at [https://sdk-cta-reference-app.vercel.app/](https://sdk-cta-reference-app.vercel.app/)
 
 Use the `Select Scenario` button to choose a scenario and see how the UI reacts.
 
