@@ -1,4 +1,4 @@
-# @wayflyer/sdk-cta reference appAdd commentMore actions
+# @wayflyer/sdk-cta reference app
 
 This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk-cta](https://www.npmjs.com/package/@wayflyer/sdk-cta)
 
@@ -10,7 +10,7 @@ Use the `Select Scenario` button to choose a scenario and see how the UI reacts.
 
 ### Using devcontainers
 
-We love [devcontainers](https://code.visualstudio.com/docs/devcontainers/containers) at Wayflyer. This project contains a `.devcontainer/devcontainer.json` file so you can quickly get started using VS Code or one of many editors that support devcontainers. Open the command palette and choose _Dev Containers: Clone Repository in Container Volume..._` and paste the URL of this repo.
+We love [devcontainers](https://code.visualstudio.com/docs/devcontainers/containers) at Wayflyer. This project contains a `.devcontainer/devcontainer.json` file so you can quickly get started using VS Code or one of many editors that support devcontainers. Open the command palette and choose `Dev Containers: Clone Repository in Container Volume...` and paste the URL of this repo.
 
 ### Without devcontainers
 
