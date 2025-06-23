@@ -1,6 +1,6 @@
 import { IconCheck } from "@tabler/icons-react";
 
-import { Button, Group, Paper, Text } from "@mantine/core";
+import { Button, Group, Paper, Stack, Text } from "@mantine/core";
 
 interface Props {
   text: string;
@@ -18,10 +18,10 @@ export default function GetFinancingBanner({
   return (
     <Paper withBorder px="lg" py="md" radius="md" bg="#021033">
       <Group justify="space-between">
-        <Text c="white" size="lg" fw={600}>
-          {text}
-        </Text>
-        <Group gap="md">
+        <Stack>
+          <Text c="white" size="lg" fw={600}>
+            {text}
+          </Text>
           <Group justify="flex-start" gap="md">
             {bulletPoints.map((point, index) => (
               <Group key={index} gap={4} align="center">
@@ -32,6 +32,8 @@ export default function GetFinancingBanner({
               </Group>
             ))}
           </Group>
+        </Stack>
+        <Group gap="md">
           <Button bg="#4B71FC" color="white" onClick={onClick}>
             {buttonText}
           </Button>
