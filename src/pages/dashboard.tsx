@@ -73,7 +73,7 @@ export default function Dashboard({ scenario }: Props) {
           company_onboarding_date: "2021-01-01",
           company_incorporation_date: "2021-01-01",
           country: "US",
-          state: "CA",
+          state: "US-CA",
           company_type: "LLC",
         },
         user_data: {
