@@ -6,6 +6,7 @@ import {
   StartHostedApplicationResponseTypes,
   WayflyerCtaSdk,
   type CtaResponseType,
+  type IHeadlessWayflyerCtaSdk,
   type StartHostedApplicationResponseType,
 } from "@wayflyer/sdk-cta";
 import { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ interface Props {
 export default function Dashboard({ scenario }: Props) {
   const [ctaData, setCtaData] = useState<CtaResponseType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [sdk, setSdk] = useState<WayflyerCtaSdk | null>(null);
+  const [sdk, setSdk] = useState<IHeadlessWayflyerCtaSdk | null>(null);
   const [
     startHostedApplicationModalOpened,
     {
@@ -32,7 +33,13 @@ export default function Dashboard({ scenario }: Props) {
 
   useEffect(() => {
     const initializeSdk = async () => {
-      const sdkInstance = new WayflyerCtaSdk("your-company-token-here");
+      const sdkInstance = (await WayflyerCtaSdk.loadSdkMode(
+        "your-company-token-here",
+        {
+          isMockedMode: true,
+          isHeadlessMode: true,
+        },
+      )) as IHeadlessWayflyerCtaSdk;
       switch (scenario) {
         case "indicative_offer":
           sdkInstance.setCtaResponse(CtaResponseTypes.INDICATIVE_OFFER);
