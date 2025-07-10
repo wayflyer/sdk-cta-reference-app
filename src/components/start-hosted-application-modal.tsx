@@ -5,7 +5,8 @@ import {
   IconInfoCircle,
   IconRefresh,
 } from "@tabler/icons-react";
-import { type StartHostedApplicationResponseType } from "@wayflyer/sdk-cta";
+import { type StartHostedApplicationResponseType } from "@wf-financing/sdk";
+import { useState } from "react";
 
 interface Props {
   opened: boolean;
@@ -20,15 +21,19 @@ export default function StartHostedApplicationModal({
   close,
   startHostedApplication,
 }: Props) {
+  const [loading, setLoading] = useState(false);
   const handleStartApplication = async () => {
     try {
+      setLoading(true);
       const result = await startHostedApplication();
       if (result?.next) {
         window.open(result.next, "_blank");
       }
+      setLoading(false);
       close();
     } catch (error) {
       console.error("Failed to start hosted application:", error);
+      setLoading(false);
     }
   };
 
@@ -95,6 +100,7 @@ export default function StartHostedApplicationModal({
               bg="#4B71FC"
               color="white"
               rightSection={<IconExternalLink size={16} />}
+              loading={loading}
             >
               Continue with Wayflyer
             </Button>

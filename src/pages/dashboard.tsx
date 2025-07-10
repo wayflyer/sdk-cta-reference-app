@@ -8,7 +8,7 @@ import {
   type CtaResponseType,
   type IHeadlessWayflyerCtaSdk,
   type StartHostedApplicationResponseType,
-} from "@wayflyer/sdk-cta";
+} from "@wf-financing/sdk";
 import { useEffect, useState } from "react";
 import ContinueApplicationBanner from "../components/continue-application-banner";
 import GetFinancingBanner from "../components/get-financing-banner";
@@ -34,9 +34,9 @@ export default function Dashboard({ scenario }: Props) {
   useEffect(() => {
     const initializeSdk = async () => {
       const sdkInstance = (await WayflyerCtaSdk.loadSdkMode(
-        "your-company-token-here",
+        import.meta.env.VITE_WF_COMPANY_TOKEN,
         {
-          isMockedMode: true,
+          isMockedMode: import.meta.env.VITE_WF_MOCKED_MODE === "true",
           isHeadlessMode: true,
         },
       )) as IHeadlessWayflyerCtaSdk;

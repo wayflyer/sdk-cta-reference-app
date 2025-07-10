@@ -20,9 +20,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.34.0
         version: 3.34.0(react@19.1.0)
-      '@wayflyer/sdk-cta':
-        specifier: ^1.0.0
-        version: 1.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@wf-financing/sdk':
+        specifier: ^1.2.2
+        version: 1.2.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -654,11 +654,11 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0-beta.0
 
-  '@wayflyer/embedded-types@0.1.1':
-    resolution: {integrity: sha512-jJ00+9wZ1zmFPgoQLI/9ldku3QU6cy61QW13x3eHH86SfHDeYTKMeqTywkKFdVZJlkpTLyY0CMYo+z8a5NGiiA==}
+  '@wf-financing/embedded-types@0.1.4':
+    resolution: {integrity: sha512-BBOCjRa6CGmTxGqzGxxraXDIHz+6wwnvN0qAaV4D4WNI4z0PtDNgHObavaIyy+DzKGoFLHJ6syeQm52FuVa83Q==}
 
-  '@wayflyer/sdk-cta@1.0.0':
-    resolution: {integrity: sha512-dn6EDadCfzoUCcrSRTBopc7cHyalev84v4PwsdWr9k/0E/xqscH3QZAzQhkFGRO9XyvYwGRxnx3loTeTYmEvDA==}
+  '@wf-financing/sdk@1.2.2':
+    resolution: {integrity: sha512-M4BtCFd/+MurseZFCTIIn2ziRHAWmqYoTWL+jHxTB4L6PLVJBVjfe0hZhAKgPxyur9GV5EfWHUJRz5P9L64mPw==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -1907,11 +1907,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wayflyer/embedded-types@0.1.1': {}
+  '@wf-financing/embedded-types@0.1.4': {}
 
-  '@wayflyer/sdk-cta@1.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@wf-financing/sdk@1.2.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@wayflyer/embedded-types': 0.1.1
+      '@wf-financing/embedded-types': 0.1.4
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 

@@ -1,6 +1,6 @@
-# @wayflyer/sdk-cta reference app
+# Wayflyer Embedded Finance Headless SDK reference app
 
-This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk-cta](https://www.npmjs.com/package/@wayflyer/sdk-cta)
+This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk](https://www.npmjs.com/package/@wayflyer/sdk)
 
 You can see a live example at [https://sdk-cta-reference-app.vercel.app/](https://sdk-cta-reference-app.vercel.app/)
 
@@ -56,3 +56,14 @@ Use the `startHostedApplication()` method to mock the `handleStartHostedApplicat
 
 - Return a valid response with a url to redirect the user to
 - Simulate auth errors
+
+## Using it with real credentials
+
+The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token.
+
+To use it for real
+
+1. Follow the instructions at https://docs.wayflyer.com to generate a real company token
+1. Add a `.env.local`
+1. Override `VITE_WF_COMPANY_TOKEN` with your real company token.
+1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`)
