@@ -4,10 +4,11 @@ import {
   CtaResponseTypes,
   CtaStateType,
   StartHostedApplicationResponseTypes,
+  WayflyerCtaSdk,
   type CtaResponseType,
+  type IHeadlessWayflyerCtaSdk,
   type StartHostedApplicationResponseType,
-} from "@wf-financing/embedded-types";
-import { HeadlessSdk } from "@wf-financing/headless";
+} from "@wf-financing/sdk";
 import { useEffect, useState } from "react";
 import ContinueApplicationBanner from "../components/continue-application-banner";
 import GetFinancingBanner from "../components/get-financing-banner";
@@ -21,7 +22,7 @@ interface Props {
 export default function Dashboard({ scenario }: Props) {
   const [ctaData, setCtaData] = useState<CtaResponseType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [sdk, setSdk] = useState<HeadlessSdk | null>(null);
+  const [sdk, setSdk] = useState<IHeadlessWayflyerCtaSdk | null>(null);
   const [
     startHostedApplicationModalOpened,
     {
@@ -32,10 +33,13 @@ export default function Dashboard({ scenario }: Props) {
 
   useEffect(() => {
     const initializeSdk = async () => {
-      const sdkInstance = new HeadlessSdk(
+      const sdkInstance = (await WayflyerCtaSdk.loadSdkMode(
         import.meta.env.VITE_WF_COMPANY_TOKEN,
-        import.meta.env.VITE_WF_MOCKED_MODE === "true",
-      );
+        {
+          isMockedMode: import.meta.env.VITE_WF_MOCKED_MODE === "true",
+          isHeadlessMode: true,
+        },
+      )) as IHeadlessWayflyerCtaSdk;
       switch (scenario) {
         case "indicative_offer":
           sdkInstance.setCtaResponse(CtaResponseTypes.INDICATIVE_OFFER);

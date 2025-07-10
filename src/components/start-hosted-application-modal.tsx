@@ -5,7 +5,7 @@ import {
   IconInfoCircle,
   IconRefresh,
 } from "@tabler/icons-react";
-import { type StartHostedApplicationResponseType } from "@wf-financing/embedded-types";
+import { type StartHostedApplicationResponseType } from "@wf-financing/sdk";
 import { useState } from "react";
 
 interface Props {

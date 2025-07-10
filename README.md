@@ -1,6 +1,6 @@
 # Wayflyer Embedded Finance Headless SDK reference app
 
-This is a React Vite app that demonstrates some of the features of [@wayflyer/headless](https://www.npmjs.com/package/@wayflyer/headless)
+This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk](https://www.npmjs.com/package/@wayflyer/sdk)
 
 You can see a live example at [https://sdk-cta-reference-app.vercel.app/](https://sdk-cta-reference-app.vercel.app/)
 
