@@ -18,20 +18,10 @@ If you don't want to use a devcontainer you can just clone the repo in the norma
 
 ### Installing dependencies
 
-Install dependencies with `pnpm i`
+From your terminal:
 
-### Configure your environment
-
-Create a .env.local file like below
-
-```
-VITE_WF_COMPANY_TOKEN=your-company-token-here
-VITE_WF_MOCKED_MODE=true
-```
-
-### Launch it!
-
-Run the example with `pnpm dev`.
+1. Install dependencies with `npm i`
+1. Run the app with `npm run dev`
 
 You should now be able to access the app at http://localhost:5173
 
@@ -68,3 +58,12 @@ Use the `startHostedApplication()` method to mock the `handleStartHostedApplicat
 - Simulate auth errors
 
 ## Using it with real credentials
+
+The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token.
+
+To use it for real
+
+1. Follow the instructions at https://docs.wayflyer.com to generate a real company token
+1. Add a `.env.local`
+1. Override `VITE_WF_COMPANY_TOKEN` with your real company token.
+1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`)
