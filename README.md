@@ -63,6 +63,7 @@ The repo comes with a `.env` file in the root that starts the SDK in mocked mode
 
 To use it for real
 
-1. Use the `get-company-token` command to create Company Token using your Client ID and Client Secret
-1. Override `VITE_WF_COMPANY_TOKEN` with the Company Token you just generated.
-1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`)
+1. Use the `get-company-token` command to create a Company Token using your Client ID and Client Secret
+1. Create a `.env.local` if you haven't already
+1. Override `VITE_WF_COMPANY_TOKEN` in `.env.local` with the Company Token you just generated.
+1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`) in `.env.local`
