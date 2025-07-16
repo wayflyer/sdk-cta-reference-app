@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "get-company-token": "node scripts/getPartnerToken.js"
+    "get-company-token": "node scripts/getCompanyToken.js"
   },
   "dependencies": {
     "@mantine/core": "^8.1.1",

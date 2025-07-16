@@ -2,7 +2,7 @@ import axios from "axios";
 import { program } from "commander";
 
 program
-  .name("getPartnerToken")
+  .name("getCompanyToken")
   .description("Get company token using partner credentials")
   .version("1.0.0")
   .requiredOption("-p, --partner-id <id>", "Partner ID")
