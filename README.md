@@ -63,7 +63,6 @@ The repo comes with a `.env` file in the root that starts the SDK in mocked mode
 
 To use it for real
 
-1. Follow the instructions at https://docs.wayflyer.com to generate a real company token
-1. Add a `.env.local`
-1. Override `VITE_WF_COMPANY_TOKEN` with your real company token.
+1. Use the `get-company-token` command to create Company Token using your Client ID and Client Secret
+1. Override `VITE_WF_COMPANY_TOKEN` with the Company Token you just generated.
 1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`)
