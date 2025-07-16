@@ -73,23 +73,9 @@ export default function Dashboard({ scenario }: Props) {
     if (sdk) {
       return await sdk.startHostedApplication({
         company_data: {
-          company_name: "Wayflyer",
-          company_currency: "USD",
-          primary_store_url: "https://wayflyer.com",
-          company_annual_revenue: 1000000000,
-          company_onboarding_date: "2021-01-01",
-          company_incorporation_date: "2021-01-01",
-          country: "US",
-          state: "US-CA",
-          company_type: "LLC",
+          company_name: `EF Test Company ${Math.random().toString(36).substring(2, 15)}`,
         },
-        user_data: {
-          first_name: "John",
-          last_name: "Doe",
-          email_address: "john.doe@example.com",
-          phone_number: "+1234567890",
-        },
-        partner_data: {},
+        partner_data: { store_hash: "qr40des3mp" },
       });
     }
   };
