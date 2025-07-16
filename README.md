@@ -20,10 +20,14 @@ If you don't want to use a devcontainer you can just clone the repo in the norma
 
 From your terminal:
 
-1. Install dependencies with `npm i`
-1. Run the app with `npm run dev`
+1. Install dependencies with `pnpm i`
+1. Run the app with `pnpm dev`
 
 You should now be able to access the app at http://localhost:5173
+
+### Preview mode
+
+This is a Vite application, and the dev mode can be quite slow. You can build and preview the app by running `pnpm build && pnpm preview`. Just make sure to run `pnpm build` again after making any changes.
 
 ## SDK Usage Examples
 
