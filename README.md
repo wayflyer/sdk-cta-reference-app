@@ -59,7 +59,7 @@ Use the `startHostedApplication()` method to mock the `handleStartHostedApplicat
 
 ## Using it with real credentials
 
-The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token.
+The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token. You can override the values in this file by creating a `.env.local` file. Any keys in `.env.local` will be used instead of the values from `.env`. The `.gitignore` is configured to ignore `.env.local`
 
 To use it for real
 
