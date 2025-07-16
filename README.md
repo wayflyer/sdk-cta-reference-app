@@ -20,10 +20,14 @@ If you don't want to use a devcontainer you can just clone the repo in the norma
 
 From your terminal:
 
-1. Install dependencies with `npm i`
-1. Run the app with `npm run dev`
+1. Install dependencies with `pnpm i`
+1. Run the app with `pnpm dev`
 
 You should now be able to access the app at http://localhost:5173
+
+### Preview mode
+
+This is a Vite application, and the dev mode can be quite slow. You can build and preview the app by running `pnpm build && pnpm preview`. Just make sure to run `pnpm build` again after making any changes.
 
 ## SDK Usage Examples
 
@@ -59,11 +63,11 @@ Use the `startHostedApplication()` method to mock the `handleStartHostedApplicat
 
 ## Using it with real credentials
 
-The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token.
+The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token. You can override the values in this file by creating a `.env.local` file. Any keys in `.env.local` will be used instead of the values from `.env`. The `.gitignore` is configured to ignore `.env.local`
 
 To use it for real
 
-1. Follow the instructions at https://docs.wayflyer.com to generate a real company token
-1. Add a `.env.local`
-1. Override `VITE_WF_COMPANY_TOKEN` with your real company token.
-1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`)
+1. Use the `get-company-token` command to create a Company Token using your Client ID and Client Secret
+1. Create a `.env.local` if you haven't already
+1. Override `VITE_WF_COMPANY_TOKEN` in `.env.local` with the Company Token you just generated.
+1. Override `VITE_WF_MOCKED_MODE` to `"false"` (or any value except `"true"`) in `.env.local`
