@@ -56,13 +56,15 @@ export default function App() {
             </div>
           </Group>
           <Group>
-            <Button
-              onClick={toggleSelectScenarioDrawer}
-              variant="outline"
-              leftSection={<IconMovie />}
-            >
-              Select Scenario
-            </Button>
+            {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
+              <Button
+                onClick={toggleSelectScenarioDrawer}
+                variant="outline"
+                leftSection={<IconMovie />}
+              >
+                Select Scenario
+              </Button>
+            )}
             <SelectScenarioDrawer
               scenario={scenario}
               opened={selectScenarioDrawerOpened}
