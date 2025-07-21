@@ -5,6 +5,7 @@ import {
   CtaStateType,
   StartHostedApplicationResponseTypes,
   WayflyerCtaSdk,
+  type ContinueHostedApplicationResponseType,
   type CtaResponseType,
   type IHeadlessWayflyerCtaSdk,
   type StartHostedApplicationResponseType,
@@ -14,6 +15,7 @@ import ContinueApplicationBanner from "../components/continue-application-banner
 import GetFinancingBanner from "../components/get-financing-banner";
 import type { Scenario } from "../components/select-scenario-menu";
 import StartHostedApplicationModal from "../components/start-hosted-application-modal";
+import { getIsMockedMode } from "../lib/utils";
 
 interface Props {
   scenario: Scenario;
@@ -30,48 +32,51 @@ export default function Dashboard({ scenario }: Props) {
       close: closeStartHostedApplicationModal,
     },
   ] = useDisclosure(false);
+  const isMockedMode = getIsMockedMode();
 
   useEffect(() => {
     const initializeSdk = async () => {
       const sdkInstance = (await WayflyerCtaSdk.loadSdkMode(
         import.meta.env.VITE_WF_COMPANY_TOKEN,
         {
-          isMockedMode: import.meta.env.VITE_WF_MOCKED_MODE === "true",
+          isMockedMode,
           isHeadlessMode: true,
         },
       )) as IHeadlessWayflyerCtaSdk;
-      switch (scenario) {
-        case "indicative_offer":
-          sdkInstance.setCtaResponse(CtaResponseTypes.INDICATIVE_OFFER);
-          break;
-        case "generic_offer":
-          sdkInstance.setCtaResponse(CtaResponseTypes.GENERIC_OFFER);
-          break;
-        case "continue_hosted_application":
-          sdkInstance.setCtaResponse(
-            CtaResponseTypes.CONTINUE_HOSTED_APPLICATION,
-          );
-          break;
-        default:
-          sdkInstance.setCtaResponse(CtaResponseTypes.NO_CTA);
-          break;
+      if (isMockedMode) {
+        switch (scenario) {
+          case "indicative_offer":
+            sdkInstance.setCtaResponse(CtaResponseTypes.INDICATIVE_OFFER);
+            break;
+          case "generic_offer":
+            sdkInstance.setCtaResponse(CtaResponseTypes.GENERIC_OFFER);
+            break;
+          case "continue_hosted_application":
+            sdkInstance.setCtaResponse(
+              CtaResponseTypes.CONTINUE_HOSTED_APPLICATION,
+            );
+            break;
+          default:
+            sdkInstance.setCtaResponse(CtaResponseTypes.NO_CTA);
+            break;
+        }
+        sdkInstance.setStartHostedApplicationResponse(
+          StartHostedApplicationResponseTypes.REDIRECT_URL,
+        );
       }
-      sdkInstance.setStartHostedApplicationResponse(
-        StartHostedApplicationResponseTypes.REDIRECT_URL,
-      );
       setSdk(sdkInstance);
       setCtaData(await sdkInstance.getCta());
       setLoading(false);
     };
 
     initializeSdk();
-  }, [scenario]);
+  }, [scenario, isMockedMode]);
 
   const handleStartHostedApplication = async (): Promise<
     StartHostedApplicationResponseType | undefined
   > => {
     if (sdk) {
-      return await sdk.startHostedApplication({
+      const startHostedApplicationResponse = await sdk.startHostedApplication({
         company_data: {
           company_name: "True Classic Teas",
           company_currency: "USD",
@@ -91,8 +96,26 @@ export default function Dashboard({ scenario }: Props) {
         },
         partner_data: {},
       });
+
+      if (isMockedMode) {
+        sdk.setCtaResponse(CtaResponseTypes.CONTINUE_HOSTED_APPLICATION);
+        setCtaData(await sdk.getCta());
+      }
+
+      return startHostedApplicationResponse;
     }
   };
+
+  const handleContinueHostedApplication = async (): Promise<
+    ContinueHostedApplicationResponseType | undefined
+  > => {
+    if (sdk) {
+      const continueHostedApplicationResponse =
+        await sdk.continueHostedApplication();
+      return continueHostedApplicationResponse;
+    }
+  };
+
   return (
     <Container size="xl" mt="xl">
       <Stack gap="xl">
@@ -117,7 +140,7 @@ export default function Dashboard({ scenario }: Props) {
             text={ctaData.data.config.text}
             bulletPoints={ctaData.data.config.bullet_points}
             buttonText={ctaData.data.config.button_label}
-            redirectUrl={ctaData.data.config.redirect_url}
+            continueHostedApplication={handleContinueHostedApplication}
           />
         )}
         <StartHostedApplicationModal
