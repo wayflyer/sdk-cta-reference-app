@@ -1,20 +1,30 @@
 import { IconCheck } from "@tabler/icons-react";
 
 import { Button, Group, Paper, Text } from "@mantine/core";
+import type { ContinueHostedApplicationResponseType } from "@wf-financing/sdk";
 
 interface Props {
   text: string;
   bulletPoints: string[];
   buttonText: string;
-  redirectUrl: string;
+  continueHostedApplication: () => Promise<
+    ContinueHostedApplicationResponseType | undefined
+  >;
 }
 
 export default function ContinueApplicationBanner({
   text,
   bulletPoints,
   buttonText,
-  redirectUrl,
+  continueHostedApplication,
 }: Props) {
+  const handleContinueHostedApplication = async () => {
+    const continueHostedApplicationResponse = await continueHostedApplication();
+    if (continueHostedApplicationResponse?.next) {
+      window.open(continueHostedApplicationResponse.next, "_blank");
+    }
+  };
+
   return (
     <Paper withBorder px="lg" py="md" radius="md" bg="#021033">
       <Group justify="space-between">
@@ -35,9 +45,7 @@ export default function ContinueApplicationBanner({
           <Button
             bg="#4B71FC"
             color="white"
-            component="a"
-            href={redirectUrl}
-            target="_blank"
+            onClick={handleContinueHostedApplication}
           >
             {buttonText}
           </Button>
