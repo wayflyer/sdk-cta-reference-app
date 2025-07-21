@@ -60,10 +60,10 @@ export default function Dashboard({ scenario }: Props) {
             sdkInstance.setCtaResponse(CtaResponseTypes.NO_CTA);
             break;
         }
+        sdkInstance.setStartHostedApplicationResponse(
+          StartHostedApplicationResponseTypes.REDIRECT_URL,
+        );
       }
-      sdkInstance.setStartHostedApplicationResponse(
-        StartHostedApplicationResponseTypes.REDIRECT_URL,
-      );
       setSdk(sdkInstance);
       setCtaData(await sdkInstance.getCta());
       setLoading(false);

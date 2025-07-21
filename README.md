@@ -36,9 +36,9 @@ This is a Vite application, and the dev mode can be quite slow. You can build an
 The Wayflyer CTA SDK is initialized in `src/pages/dashboard.tsx`. From there, you can see how to:
 
 - Create a new SDK instance with your company token
-  - In production this would be minted from the API by exchanging your partner token; consult the documentation provided by Wayflyer for more instructions.
+  - In production this would be minted from the API by exchanging your partner token; consult the documentation at [https://docs.wayflyer.com](https://docs.wayflyer.com) for more instructions.
 - Mock responses for `getCta()` and `startHostedApplication()`
-- Configure the start hosted application response type to return a redirect URL
+- Use the `continueHostedApplication()` method to resume an in-progress application
 
 ### Mocking API calls
 
@@ -50,15 +50,22 @@ Use the `setCtaResponse()` method to mock the `getCta()` method. The response fr
 
 - **Indicative Offer**: Shows a financing banner with specific offer details
 - **Generic Offer**: Displays a general financing banner without specific terms
-- **Continue Application**: Shows a banner to continue an existing application with a redirect URL
+- **Continue Application**: Shows a banner to continue an existing application
 - **No CTA**: Returns no call-to-action data
 - Simulate auth errors
 
 ### Mocking startHostedApplication() calls
 
-Use the `startHostedApplication()` method to mock the `handleStartHostedApplication()` method. It can be configured to:
+Use the `setStartHostedApplicationResponse()` method to mock the `startHostedApplication()` method. It can be configured to:
 
-- Return a valid response with a url to redirect the user to
+- Return a success response
+- Simulate auth errors
+
+### Mocking continueHostedApplication() calls
+
+Use the `setContinueHostedApplicationResponse()` method to mock the `continueHostedApplication()` method. It can be configured to:
+
+- Return a success response with a url to redirect the user to
 - Simulate auth errors
 
 ## Using it with real credentials
