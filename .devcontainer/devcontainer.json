@@ -12,7 +12,7 @@
   "forwardPorts": [4173, 5173]
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "yarn install",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y xdg-utils"
 
   // Configure tool-specific properties.
   // "customizations": {},

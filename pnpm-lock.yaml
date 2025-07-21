@@ -81,6 +81,9 @@ importers:
       vite:
         specifier: ^6.3.5
         version: 6.3.5(sugarss@5.0.0(postcss@8.5.6))
+      vite-bundle-analyzer:
+        specifier: ^1.1.0
+        version: 1.1.0
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu':
         specifier: 4.9.5
@@ -1411,6 +1414,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  vite-bundle-analyzer@1.1.0:
+    resolution: {integrity: sha512-f/9m+6S5yPOHf/QS00rLOkyQ0icZeF67roM3O5LZZMPTOZFU1bHJTptNHCKMJc2yxXzj0Hunwcetrc+vM2LEQQ==}
+    hasBin: true
+
   vite@6.3.5:
     resolution: {integrity: sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
@@ -2712,6 +2719,8 @@ snapshots:
       '@types/react': 19.1.8
 
   util-deprecate@1.0.2: {}
+
+  vite-bundle-analyzer@1.1.0: {}
 
   vite@6.3.5(sugarss@5.0.0(postcss@8.5.6)):
     dependencies:
