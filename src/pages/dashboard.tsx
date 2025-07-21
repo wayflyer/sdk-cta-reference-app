@@ -71,7 +71,7 @@ export default function Dashboard({ scenario }: Props) {
     StartHostedApplicationResponseType | undefined
   > => {
     if (sdk) {
-      return await sdk.startHostedApplication({
+      const startHostedApplicationResponse = await sdk.startHostedApplication({
         company_data: {
           company_name: "True Classic Teas",
           company_currency: "USD",
@@ -91,8 +91,12 @@ export default function Dashboard({ scenario }: Props) {
         },
         partner_data: {},
       });
+      sdk.setCtaResponse(CtaResponseTypes.CONTINUE_HOSTED_APPLICATION);
+      setCtaData(await sdk.getCta());
+      return startHostedApplicationResponse;
     }
   };
+
   return (
     <Container size="xl" mt="xl">
       <Stack gap="xl">
