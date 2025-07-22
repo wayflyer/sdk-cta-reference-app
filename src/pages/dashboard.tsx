@@ -88,19 +88,14 @@ export default function Dashboard({ scenario }: Props) {
           state: "US-CA",
           company_type: "LLC",
         },
-        user_data: {
-          first_name: "John",
-          last_name: "Doe",
-          email_address: "john.doe@example.com",
-          phone_number: "+1234567890",
-        },
+        user_data: {},
         partner_data: {},
       });
 
       if (isMockedMode) {
         sdk.setCtaResponse(CtaResponseTypes.CONTINUE_HOSTED_APPLICATION);
-        setCtaData(await sdk.getCta());
       }
+      setCtaData(await sdk.getCta());
 
       return startHostedApplicationResponse;
     }
