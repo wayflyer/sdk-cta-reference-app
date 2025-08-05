@@ -1,9 +1,9 @@
 import { Button, Menu } from "@mantine/core";
 
-export type Scenario = "no_cta" | "continue_application" | "new_application";
+export type ScenarioUI = "no_cta" | "continue_application" | "new_application";
 
 interface Props {
-  onSelect: (scenario: Scenario) => void;
+  onSelect: (scenario: ScenarioUI) => void;
 }
 
 export default function SelectUIScenarioMenu({ onSelect }: Props) {

@@ -16,6 +16,9 @@ import { useState } from "react";
 import logo from "./assets/logo.svg";
 import SelectScenarioDrawer from "./components/select-scenario-drawer";
 import { type Scenario } from "./components/select-scenario-menu";
+import SelectUIScenarioDrawer from "./components/select-ui-scenario-drawer";
+import { type ScenarioUI } from "./components/select-ui-scenario-menu";
+import { UiBanner } from "./components/UiBanner";
 import Dashboard from "./pages/dashboard";
 
 const navigationItems = [
@@ -34,7 +37,13 @@ export default function App() {
   const [opened, { toggle }] = useDisclosure();
   const [selectScenarioDrawerOpened, { toggle: toggleSelectScenarioDrawer }] =
     useDisclosure();
-  const [scenario, setScenario] = useState<Scenario>("indicative_offer");
+  const [
+    selectUIScenarioDrawerOpened,
+    { toggle: toggleUISelectScenarioDrawer },
+  ] = useDisclosure();
+
+  const [scenario, setScenario] = useState<Scenario>("new_application");
+  const [scenarioUI, setScenarioUI] = useState<ScenarioUI>("new_application");
 
   return (
     <AppShell
@@ -55,22 +64,43 @@ export default function App() {
               <Image src={logo} alt="Wayflyer" fit="contain" />
             </div>
           </Group>
+
           <Group>
-            {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
-              <Button
-                onClick={toggleSelectScenarioDrawer}
-                variant="outline"
-                leftSection={<IconMovie />}
-              >
-                Select Scenario
-              </Button>
-            )}
-            <SelectScenarioDrawer
-              scenario={scenario}
-              opened={selectScenarioDrawerOpened}
-              onClose={toggleSelectScenarioDrawer}
-              onSelect={setScenario}
-            />
+            <Group>
+              {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
+                <Button
+                  onClick={toggleUISelectScenarioDrawer}
+                  variant="outline"
+                  leftSection={<IconMovie />}
+                >
+                  Select UI Package Scenario
+                </Button>
+              )}
+              <SelectUIScenarioDrawer
+                scenario={scenarioUI}
+                opened={selectUIScenarioDrawerOpened}
+                onClose={toggleUISelectScenarioDrawer}
+                onSelect={setScenarioUI}
+              />
+            </Group>
+
+            <Group>
+              {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
+                <Button
+                  onClick={toggleSelectScenarioDrawer}
+                  variant="outline"
+                  leftSection={<IconMovie />}
+                >
+                  Select Headless Package Scenario
+                </Button>
+              )}
+              <SelectScenarioDrawer
+                scenario={scenario}
+                opened={selectScenarioDrawerOpened}
+                onClose={toggleSelectScenarioDrawer}
+                onSelect={setScenario}
+              />
+            </Group>
           </Group>
         </Group>
       </AppShell.Header>
@@ -87,6 +117,7 @@ export default function App() {
         ))}
       </AppShell.Navbar>
       <AppShell.Main bg="gray.1">
+        <UiBanner scenario={scenarioUI} />
         <Dashboard scenario={scenario} />
       </AppShell.Main>
     </AppShell>
