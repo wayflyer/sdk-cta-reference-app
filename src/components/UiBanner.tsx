@@ -8,12 +8,11 @@ import {
 } from "@wf-financing/ui-entry";
 import { useEffect, useState } from "react";
 import { getCompanyToken, getIsMockedMode } from "../lib/utils";
-import type { ScenarioUI } from "./select-ui-scenario-menu";
 
 export interface UiBannerProps {
   targetId?: string;
   partnerDesignId?: string;
-  scenario: ScenarioUI;
+  scenario: SdkScenarios;
 }
 
 export const UiBanner = ({

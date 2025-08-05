@@ -12,12 +12,12 @@ import {
   IconTag,
   IconUsers,
 } from "@tabler/icons-react";
+import { SdkScenarios } from "@wf-financing/headless-entry";
+import { SdkScenarios as UiSdkScenarios } from "@wf-financing/ui-entry";
 import { useState } from "react";
 import logo from "./assets/logo.svg";
 import SelectScenarioDrawer from "./components/select-scenario-drawer";
-import { type Scenario } from "./components/select-scenario-menu";
 import SelectUIScenarioDrawer from "./components/select-ui-scenario-drawer";
-import { type ScenarioUI } from "./components/select-ui-scenario-menu";
 import { UiBanner } from "./components/UiBanner";
 import Dashboard from "./pages/dashboard";
 
@@ -42,8 +42,12 @@ export default function App() {
     { toggle: toggleUISelectScenarioDrawer },
   ] = useDisclosure();
 
-  const [scenario, setScenario] = useState<Scenario>("new_application");
-  const [scenarioUI, setScenarioUI] = useState<ScenarioUI>("new_application");
+  const [scenario, setScenario] = useState<SdkScenarios>(
+    SdkScenarios.NEW_APPLICATION,
+  );
+  const [scenarioUI, setScenarioUI] = useState<UiSdkScenarios>(
+    SdkScenarios.NEW_APPLICATION,
+  );
 
   return (
     <AppShell

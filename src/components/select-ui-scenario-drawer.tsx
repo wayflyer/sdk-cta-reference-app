@@ -1,28 +1,28 @@
 import { Drawer, NavLink, Stack } from "@mantine/core";
-import type { ScenarioUI } from "./select-ui-scenario-menu";
+import { SdkScenarios } from "@wf-financing/ui-entry";
 
 interface Props {
-  scenario: ScenarioUI;
+  scenario: SdkScenarios;
   opened: boolean;
   onClose: () => void;
-  onSelect: (scenario: ScenarioUI) => void;
+  onSelect: (scenario: SdkScenarios) => void;
 }
 
 const scenarios = [
   {
-    value: "new_application" as ScenarioUI,
+    value: "new_application" as SdkScenarios,
     label: "New application",
     description:
       "Simulates a customer who is eligible for financing and has not yet started an application, so sees the initial banner inviting them to apply.",
   },
   {
-    value: "continue_application" as ScenarioUI,
+    value: "continue_application" as SdkScenarios,
     label: "Continue hosted application",
     description:
       "Simulates a customer that has already started an application, but has not completed it.",
   },
   {
-    value: "no_cta" as ScenarioUI,
+    value: "no_cta" as SdkScenarios,
     label: "No CTA",
     description:
       "Simulates a customer that has no offers and no application. Perhaps beacuse they are ineligible.",
@@ -35,7 +35,7 @@ export default function SelectUIScenarioDrawer({
   onClose,
   onSelect,
 }: Props) {
-  const handleOnClick = (scenario: ScenarioUI) => {
+  const handleOnClick = (scenario: SdkScenarios) => {
     onSelect(scenario);
     onClose();
   };

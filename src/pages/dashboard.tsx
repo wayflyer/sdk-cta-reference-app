@@ -13,12 +13,11 @@ import {
 import { useEffect, useState } from "react";
 import ContinueApplicationBanner from "../components/continue-application-banner";
 import GetFinancingBanner from "../components/get-financing-banner";
-import type { Scenario } from "../components/select-scenario-menu";
 import StartHostedApplicationModal from "../components/start-hosted-application-modal";
 import { getCompanyToken, getIsMockedMode } from "../lib/utils";
 
 interface Props {
-  scenario: Scenario;
+  scenario: SdkScenarios;
 }
 
 export default function Dashboard({ scenario }: Props) {
