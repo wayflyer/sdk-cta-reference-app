@@ -1,5 +1,5 @@
 import { Button, Menu } from "@mantine/core";
-import { SdkScenarios } from "@wf-financing/headless-entry";
+import { SdkScenarios } from "@wf-financing/ui-entry";
 
 interface Props {
   onSelect: (scenario: SdkScenarios) => void;

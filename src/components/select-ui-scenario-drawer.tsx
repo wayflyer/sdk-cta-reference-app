@@ -1,5 +1,5 @@
 import { Drawer, NavLink, Stack } from "@mantine/core";
-import type { SdkScenarios } from "@wf-financing/headless-entry";
+import { SdkScenarios } from "@wf-financing/ui-entry";
 
 interface Props {
   scenario: SdkScenarios;
@@ -29,7 +29,7 @@ const scenarios = [
   },
 ];
 
-export default function SelectScenarioDrawer({
+export default function SelectUIScenarioDrawer({
   scenario,
   opened,
   onClose,
@@ -45,7 +45,7 @@ export default function SelectScenarioDrawer({
       opened={opened}
       onClose={onClose}
       position="right"
-      title="Select Headless Package Scenario"
+      title="Select UI Package Scenario"
     >
       <Stack>
         {scenarios.map(({ value, label, description }) => (

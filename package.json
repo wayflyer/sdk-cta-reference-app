@@ -16,7 +16,8 @@
     "@mantine/hooks": "^8.1.1",
     "@mantine/modals": "^8.1.1",
     "@tabler/icons-react": "^3.34.0",
-    "@wf-financing/sdk": "^1.4.0",
+    "@wf-financing/headless-entry": "0.1.0",
+    "@wf-financing/ui-entry": "0.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
