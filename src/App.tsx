@@ -12,13 +12,10 @@ import {
   IconTag,
   IconUsers,
 } from "@tabler/icons-react";
-import { SdkScenarios } from "@wf-financing/headless-entry";
-import { SdkScenarios as UiSdkScenarios } from "@wf-financing/ui-entry";
 import { useState } from "react";
 import logo from "./assets/logo.svg";
 import SelectScenarioDrawer from "./components/select-scenario-drawer";
-import SelectUIScenarioDrawer from "./components/select-ui-scenario-drawer";
-import { UiBanner } from "./components/UiBanner";
+import { type Scenario } from "./components/select-scenario-menu";
 import Dashboard from "./pages/dashboard";
 
 const navigationItems = [
@@ -37,17 +34,7 @@ export default function App() {
   const [opened, { toggle }] = useDisclosure();
   const [selectScenarioDrawerOpened, { toggle: toggleSelectScenarioDrawer }] =
     useDisclosure();
-  const [
-    selectUIScenarioDrawerOpened,
-    { toggle: toggleUISelectScenarioDrawer },
-  ] = useDisclosure();
-
-  const [scenario, setScenario] = useState<SdkScenarios>(
-    SdkScenarios.NEW_APPLICATION,
-  );
-  const [scenarioUI, setScenarioUI] = useState<UiSdkScenarios>(
-    SdkScenarios.NEW_APPLICATION,
-  );
+  const [scenario, setScenario] = useState<Scenario>("indicative_offer");
 
   return (
     <AppShell
@@ -68,43 +55,22 @@ export default function App() {
               <Image src={logo} alt="Wayflyer" fit="contain" />
             </div>
           </Group>
-
           <Group>
-            <Group>
-              {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
-                <Button
-                  onClick={toggleUISelectScenarioDrawer}
-                  variant="outline"
-                  leftSection={<IconMovie />}
-                >
-                  Select UI Package Scenario
-                </Button>
-              )}
-              <SelectUIScenarioDrawer
-                scenario={scenarioUI}
-                opened={selectUIScenarioDrawerOpened}
-                onClose={toggleUISelectScenarioDrawer}
-                onSelect={setScenarioUI}
-              />
-            </Group>
-
-            <Group>
-              {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
-                <Button
-                  onClick={toggleSelectScenarioDrawer}
-                  variant="outline"
-                  leftSection={<IconMovie />}
-                >
-                  Select Headless Package Scenario
-                </Button>
-              )}
-              <SelectScenarioDrawer
-                scenario={scenario}
-                opened={selectScenarioDrawerOpened}
-                onClose={toggleSelectScenarioDrawer}
-                onSelect={setScenario}
-              />
-            </Group>
+            {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
+              <Button
+                onClick={toggleSelectScenarioDrawer}
+                variant="outline"
+                leftSection={<IconMovie />}
+              >
+                Select Scenario
+              </Button>
+            )}
+            <SelectScenarioDrawer
+              scenario={scenario}
+              opened={selectScenarioDrawerOpened}
+              onClose={toggleSelectScenarioDrawer}
+              onSelect={setScenario}
+            />
           </Group>
         </Group>
       </AppShell.Header>
@@ -121,7 +87,6 @@ export default function App() {
         ))}
       </AppShell.Navbar>
       <AppShell.Main bg="gray.1">
-        <UiBanner scenario={scenarioUI} />
         <Dashboard scenario={scenario} />
       </AppShell.Main>
     </AppShell>

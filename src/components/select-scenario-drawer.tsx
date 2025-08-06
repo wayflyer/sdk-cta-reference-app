@@ -1,28 +1,39 @@
 import { Drawer, NavLink, Stack } from "@mantine/core";
-import type { SdkScenarios } from "@wf-financing/headless-entry";
+
+export type Scenario =
+  | "indicative_offer"
+  | "generic_offer"
+  | "no_cta"
+  | "continue_hosted_application";
 
 interface Props {
-  scenario: SdkScenarios;
+  scenario: Scenario;
   opened: boolean;
   onClose: () => void;
-  onSelect: (scenario: SdkScenarios) => void;
+  onSelect: (scenario: Scenario) => void;
 }
 
 const scenarios = [
   {
-    value: "new_application" as SdkScenarios,
-    label: "New application",
+    value: "indicative_offer" as Scenario,
+    label: "Indicative offer",
     description:
-      "Simulates a customer who is eligible for financing and has not yet started an application, so sees the initial banner inviting them to apply.",
+      "Simulates a customer that has an indicative offer, based off of data shared with Wayflyer ahead of time.",
   },
   {
-    value: "continue_application" as SdkScenarios,
+    value: "generic_offer" as Scenario,
+    label: "Generic offer",
+    description:
+      "Simulates a customer that is eligible but has no offers, so sees generic copy.",
+  },
+  {
+    value: "continue_hosted_application" as Scenario,
     label: "Continue hosted application",
     description:
       "Simulates a customer that has already started an application, but has not completed it.",
   },
   {
-    value: "no_cta" as SdkScenarios,
+    value: "no_cta" as Scenario,
     label: "No CTA",
     description:
       "Simulates a customer that has no offers and no application. Perhaps beacuse they are ineligible.",
@@ -35,7 +46,7 @@ export default function SelectScenarioDrawer({
   onClose,
   onSelect,
 }: Props) {
-  const handleOnClick = (scenario: SdkScenarios) => {
+  const handleOnClick = (scenario: Scenario) => {
     onSelect(scenario);
     onClose();
   };
@@ -45,7 +56,7 @@ export default function SelectScenarioDrawer({
       opened={opened}
       onClose={onClose}
       position="right"
-      title="Select Headless Package Scenario"
+      title="Select Scenario"
     >
       <Stack>
         {scenarios.map(({ value, label, description }) => (

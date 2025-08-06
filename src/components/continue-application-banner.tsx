@@ -1,7 +1,7 @@
 import { IconCheck } from "@tabler/icons-react";
 
 import { Button, Group, Paper, Text } from "@mantine/core";
-import type { ContinueHostedApplicationResponseType } from "@wf-financing/headless-entry";
+import type { ContinueHostedApplicationResponseType } from "@wf-financing/sdk";
 
 interface Props {
   text: string;
