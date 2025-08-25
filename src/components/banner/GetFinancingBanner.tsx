@@ -9,12 +9,12 @@ interface Props {
   onClick: () => void;
 }
 
-export default function GetFinancingBanner({
+export const GetFinancingBanner = ({
   text,
   bulletPoints,
   buttonText,
   onClick,
-}: Props) {
+}: Props) => {
   return (
     <Paper withBorder px="lg" py="md" radius="md" bg="#021033">
       <Group justify="space-between">
@@ -41,4 +41,4 @@ export default function GetFinancingBanner({
       </Group>
     </Paper>
   );
-}
+};

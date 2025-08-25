@@ -1,6 +1,6 @@
 # Wayflyer Embedded Finance Headless SDK reference app
 
-This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk](https://www.npmjs.com/package/@wayflyer/sdk)
+This is a React Vite app that demonstrates some of the features of [@wayflyer/headless-sdk](https://www.npmjs.com/package/@wayflyer/headless-sdk)
 
 You can see a live example at [https://sdk-cta-reference-app.vercel.app/](https://sdk-cta-reference-app.vercel.app/)
 
@@ -48,10 +48,15 @@ The SDK is currently still under active development and is configured to always 
 
 Use the `setCtaResponse()` method to mock the `getCta()` method. The response from `getCta()` contains a payload that should be used to render different kinds of banner components. In the dashboard component, you can see examples of:
 
-- **Indicative Offer**: Shows a financing banner with specific offer details
-- **Generic Offer**: Displays a general financing banner without specific terms
-- **Continue Application**: Shows a banner to continue an existing application
-- **No CTA**: Returns no call-to-action data
+#### Available scenarios
+
+When running in mocked mode, you can preview different banner states by changing the scenario prop.
+These scenarios are defined in the SdkScenarios enum and typically include:
+
+- **Indicative Offer**: Simulates a customer who hasn`t started an application but has an indicative offer based on partner data. Displays a personalized offer and CTA to apply.
+- **Generic New Application**: Simulates a customer who hasn't started an application and lacks sufficient data for an indicative offer. Shows a generic invitation to apply for financing.
+- **Continue Application**: Simulates a customer with an incomplete application. Shows progress-related messaging and CTAs encouraging them to finish applying.
+- **No CTA**: Simulates a customer who sees no banner, either due to ineligibility or no relevant CTAs at this time.
 - Simulate auth errors
 
 ### Mocking startHostedApplication() calls

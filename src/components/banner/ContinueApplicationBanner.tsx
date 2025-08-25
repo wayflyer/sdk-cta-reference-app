@@ -1,7 +1,7 @@
 import { IconCheck } from "@tabler/icons-react";
 
 import { Button, Group, Paper, Text } from "@mantine/core";
-import type { ContinueHostedApplicationResponseType } from "@wf-financing/sdk";
+import type { ContinueHostedApplicationResponseType } from "@wf-financing/headless-sdk";
 
 interface Props {
   text: string;
@@ -12,12 +12,12 @@ interface Props {
   >;
 }
 
-export default function ContinueApplicationBanner({
+export const ContinueApplicationBanner = ({
   text,
   bulletPoints,
   buttonText,
   continueHostedApplication,
-}: Props) {
+}: Props) => {
   const handleContinueHostedApplication = async () => {
     const continueHostedApplicationResponse = await continueHostedApplication();
     if (continueHostedApplicationResponse?.next) {
@@ -53,4 +53,4 @@ export default function ContinueApplicationBanner({
       </Group>
     </Paper>
   );
-}
+};
