@@ -1,11 +1,6 @@
-import { Button, Group, Modal, Pill, Stack, Text } from "@mantine/core";
-import {
-  IconCircleCheck,
-  IconExternalLink,
-  IconInfoCircle,
-  IconRefresh,
-} from "@tabler/icons-react";
-import { type StartHostedApplicationResponseType } from "@wf-financing/sdk";
+import { Button, Group, Modal, Stack, Text } from "@mantine/core";
+import { IconExternalLink } from "@tabler/icons-react";
+import { type StartHostedApplicationResponseType } from "@wf-financing/headless-sdk";
 import { useState } from "react";
 
 interface Props {
@@ -16,11 +11,11 @@ interface Props {
   >;
 }
 
-export default function StartHostedApplicationModal({
+export const StartHostedApplicationModal = ({
   opened,
   close,
   startHostedApplication,
-}: Props) {
+}: Props) => {
   const [loading, setLoading] = useState(false);
   const handleStartApplication = async () => {
     try {
@@ -48,48 +43,40 @@ export default function StartHostedApplicationModal({
       <Stack gap="xl" px="md">
         <Stack gap="lg">
           <Text size="26px" fw={600} c="#313440" lh="120%">
-            We work with Wayflyer to provide you capital
+            Fuel your growth with capital from Wayflyer
           </Text>
           <Group gap="xs" align="flex-start">
-            <IconInfoCircle />
             <Stack gap={0}>
               <Group gap="xs">
                 <Text size="sm" fw={600} c="#313440" lh="120%">
-                  Create your account
+                  Built for businesses like yours
                 </Text>
-                <Pill>2 mins</Pill>
               </Group>
               <Text c="#5E637A">
-                Tell us about your business and funding needs
+                $5B+ deployed to 5,000+ companies since 2019
               </Text>
             </Stack>
           </Group>
           <Group gap="xs" align="flex-start">
-            <IconRefresh />
             <Stack gap={0}>
               <Group gap="xs">
                 <Text size="sm" fw={600} c="#313440" lh="120%">
-                  Connect your platforms and apply
+                  Your growth, your way
                 </Text>
-                <Pill>10 mins</Pill>
               </Group>
               <Text c="#5E637A">
-                We&apos;ll analyze your business performance
+                Flexible products with terms that fit your business
               </Text>
             </Stack>
           </Group>
           <Group gap="xs" align="flex-start">
-            <IconCircleCheck />
             <Stack gap={0}>
               <Group gap="xs">
                 <Text size="sm" fw={600} c="#313440" lh="120%">
-                  Accept and receive funds
+                  Quick to get started
                 </Text>
-                <Pill>24 hours</Pill>
               </Group>
-              <Text c="#5E637A">
-                Once approved, funds can be deployed in 24h
-              </Text>
+              <Text c="#5E637A">Apply in minutes and get capital in hours</Text>
             </Stack>
           </Group>
         </Stack>
@@ -109,10 +96,13 @@ export default function StartHostedApplicationModal({
             </Button>
           </Group>
           <Text c="#313440" size="xs">
-            By proceeding, you consent to sharing your information with Wayflyer
+            By proceeding, you consent to us sharing your information with
+            Wayflyer so they can assess your eligibility for financing, in
+            accordance with the Wayflyer{" "}
+            <a href="https://wayflyer.com/en/privacy-notice">Privacy Policy.</a>
           </Text>
         </Stack>
       </Stack>
     </Modal>
   );
-}
+};
